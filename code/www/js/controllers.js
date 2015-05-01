@@ -4,7 +4,7 @@ angular.module('songhop.controllers', ['ionic', 'songhop.services'])
 /*
 Controller for the discover page
 */
-.controller('DiscoverCtrl', function($scope, User, Recommendations) {
+.controller('DiscoverCtrl', function($scope, $ionicLoading, User, Recommendations) {
 
  Recommendations.init()
     .then(function(){
@@ -40,9 +40,12 @@ Controller for the favorites page
 /*
 Controller for our tab bar
 */
-.controller('TabsCtrl', function($scope, Recommendations) {
+.controller('TabsCtrl', function($scope, Recommendations, User) {
+
+	$scope.favCount = User.favoriteCount;
 
 	$scope.enteringFavorites = function(){
+		User.newFavorites = 0;
 		Recommendations.haltAudio();
 	}
 
