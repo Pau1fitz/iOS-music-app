@@ -4,14 +4,15 @@
 
     <div class="list card current-song">
 
-      <div class="item item-image">
-        <img ng-src="{{currentSong.image_large}}">
-      </div>
+      <div class="item item-body">
+        <img class="full-image" ng-src="{{currentSong.image_medium}}">
+      <!-- </div> -->
 
-      <div class="item">
+      <!-- <div class="item"> -->
         <h2>{{currentSong.title}}</h2>
         <p>{{currentSong.artist}}</p>
       </div>
+
 
       <div class="item tabs tabs-secondary tabs-icon-left">
         <a class="tab-item" ng-click="sendFeedback(false)">
