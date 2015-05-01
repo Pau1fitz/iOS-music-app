@@ -4,7 +4,23 @@ angular.module('songhop.controllers', ['ionic', 'songhop.services'])
 /*
 Controller for the discover page
 */
-.controller('DiscoverCtrl', function($scope) {
+.controller('DiscoverCtrl', function($scope, User, Recommendations) {
+
+ Recommendations.getNextSongs()
+    .then(function(){
+      $scope.currentSong = Recommendations.queue[0];
+    });
+
+  $scope.sendFeedback = function(bool){
+
+  	if(bool) User.addSongToFavorites($scope.currentSong)
+
+  	Recommendations.nextSong();
+
+  	$scope.currentSong = Recommendations.queue[0];
+  }
+
+
 
 })
 
@@ -12,8 +28,12 @@ Controller for the discover page
 /*
 Controller for the favorites page
 */
-.controller('FavoritesCtrl', function($scope) {
+.controller('FavoritesCtrl', function($scope, User) {
+	 $scope.favorites = User.favorites;
 
+	 $scope.removeSong = function(song, index){
+	 	User.removeSongFromFavorites(song, index)
+	 }
 })
 
 
